@@ -31,13 +31,13 @@ function AcceptedLeadFooter ({ contact, description }: { contact: IContact, desc
   )
 }
 
-function InvitedLeadFooter ({ id, price, updFn }: { id: string, price: number, updFn: (id: string, status: string) => Promise<void> }): JSX.Element {
+function InvitedLeadFooter ({ id, price, updFn }: { id: string, price: number, updFn?: (id: string, status: string) => Promise<void> }): JSX.Element {
   return (
     <>
       <Separator />
       <CardFooter className='gap-6 pt-6'>
-        <Button variant="default" onClick={() => { updFn(id, 'Accepted') }}>Accept</Button>
-        <Button variant="secondary" onClick={() => { updFn(id, 'Declined') }}>Decline</Button>
+        <Button variant="default" onClick={() => { updFn?.(id, 'Accepted') }}>Accept</Button>
+        <Button variant="secondary" onClick={() => { updFn?.(id, 'Declined') }}>Decline</Button>
         <p><strong>{formatCurrency(price)}</strong> Lead Invitation</p>
       </CardFooter>
     </>
